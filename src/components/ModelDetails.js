@@ -10,12 +10,10 @@ export default class ModelDetails extends Component {
     }
     
     render() {
-
         return (
-            
             <div>
                 {this.props.name &&
-                <ul key={Math.random() * 10000}>
+                <ul>
                     <li>Name: {this.props.name}</li>
                     <li>Manufacturer: {this.props.manufacturer}</li>
                     <li>Year: {this.props.year}</li>
@@ -23,7 +21,6 @@ export default class ModelDetails extends Component {
                 </ul>
                 }
             </div>
-            
         )
     }
 }
