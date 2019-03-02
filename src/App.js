@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import './App.css'
 import { connect } from 'react-redux';
 import {addModel} from './action'
+import ModelDetails from './components/ModelDetails'
 
 const data = {
   "Ivel Z3": {
@@ -29,26 +30,31 @@ const data = {
 class App extends Component {
 
   state = {
-    value: 'initial value'
+    name: 'initial value'
   }
 
   updateSelection = (event) => {
-    this.setState({value: event.target.value})
+    this.setState({name: event.target.value})
   }
 
   updateModels = () => {
-    this.props.addModel(this.state.value, data[this.state.value])
+    this.props.addModel(this.state.name, data[this.state.name])
   }
   
   render() {
     
     return (
+      
       <div className="App">
+
+        <ModelDetails data={this.props.data}/>
+
         <select onChange={this.updateSelection}>
           <option value="">--pick a model--</option>
-          {Object.entries(data).map(([key, value], i) =>
-            <option key={i} value={key}>{key} ({value.year})</option>
-            )
+          
+          {Object.entries(data)
+            .map(([key, value], i) =>
+              <option key={i} value={key}>{key} ({value.year})</option>)
           }
         </select>
         <button onClick={this.updateModels}>Add</button>
@@ -58,8 +64,9 @@ class App extends Component {
 }
 
 const mapStateToProps = state => {
+
   return {
-    state
+    data: state
   }
 }
 
