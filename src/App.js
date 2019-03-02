@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import './App.css'
-import { connect } from 'react-redux';
-import {addModel} from './action'
+import { connect } from 'react-redux'
+import {addModel} from './actions/action'
 import ModelDetails from './components/ModelDetails'
 
 const data = {
@@ -30,7 +30,7 @@ const data = {
 class App extends Component {
 
   state = {
-    name: 'initial value'
+    name: null
   }
 
   updateSelection = (event) => {
@@ -42,16 +42,23 @@ class App extends Component {
   }
   
   render() {
-    
     return (
-      
       <div className="App">
-
-        <ModelDetails data={this.props.data}/>
-
+        {
+          this.props.data.map(
+            model => <ModelDetails 
+              key={model.name}
+              name={model.name} 
+              manufacturer={model.manufacturer} 
+              year={model.year} 
+              origin={model.origin}
+            />
+          )
+        }
+        
         <select onChange={this.updateSelection}>
           <option value="">--pick a model--</option>
-          
+
           {Object.entries(data)
             .map(([key, value], i) =>
               <option key={i} value={key}>{key} ({value.year})</option>)
