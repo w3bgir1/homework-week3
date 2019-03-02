@@ -3,26 +3,27 @@ import PropTypes from 'prop-types'
 
 export default class ModelDetails extends Component {
     static propTypes = {
-        data: PropTypes.array.isRequired
+        name: PropTypes.string.isRequired,
+        manufacturer: PropTypes.string.isRequired,
+        year: PropTypes.number.isRequired,
+        origin: PropTypes.string.isRequired
     }
     
     render() {
-        const data = this.props.data
 
         return (
+            
             <div>
-                {(data.length > 0) && data.map(item=> {
-                    return (
-                        <ul key={Math.random()*10}>
-                            <li>Name: {item.name}</li>
-                            <li>Manufacturer: {item.manufacturer}</li>
-                            <li>Year: {item.year}</li>
-                            <li>Origin: {item.origin}</li>
-                        </ul>
-                        )
-                    })
+                {this.props.name &&
+                <ul key={Math.random() * 10000}>
+                    <li>Name: {this.props.name}</li>
+                    <li>Manufacturer: {this.props.manufacturer}</li>
+                    <li>Year: {this.props.year}</li>
+                    <li>Origin: {this.props.origin}</li>
+                </ul>
                 }
             </div>
+            
         )
     }
 }

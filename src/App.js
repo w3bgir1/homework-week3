@@ -30,7 +30,7 @@ const data = {
 class App extends Component {
 
   state = {
-    name: 'initial value'
+    name: null
   }
 
   updateSelection = (event) => {
@@ -46,12 +46,15 @@ class App extends Component {
     return (
       
       <div className="App">
-
-        <ModelDetails data={this.props.data}/>
+        {
+          this.props.data.map(model=> {
+            return <ModelDetails name={model.name} manufacturer={model.manufacturer} year={model.year} origin={model.origin}/>
+          })
+        }
 
         <select onChange={this.updateSelection}>
           <option value="">--pick a model--</option>
-          
+
           {Object.entries(data)
             .map(([key, value], i) =>
               <option key={i} value={key}>{key} ({value.year})</option>)
